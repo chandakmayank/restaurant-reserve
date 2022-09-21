@@ -13,6 +13,7 @@ app.use(cors(corsOptions));
 // DB connection initialize
 const db = require("./app/models");
 const Role = db.role;
+const Tables = db.tables;
 
 db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync Db');
@@ -23,19 +24,18 @@ db.sequelize.sync({force: true}).then(() => {
 
 function initial() {
   Role.create({
-    id: 1,
+    roleId: 1,
     name: "user"
   });
  
   Role.create({
-    id: 2,
-    name: "moderator"
-  });
- 
-  Role.create({
-    id: 3,
+    roleId: 2,
     name: "admin"
   });
+  Tables.create({
+    table_no: 1,
+    capacity: 5
+  })
 }
 
 // parse requests of content-type - application/json
