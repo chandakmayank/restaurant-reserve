@@ -1,0 +1,33 @@
+queries
+
+
+findAll reservtion
+findall reservation for the day
+
+
+check if any overlap
+where : {
+    sequelize.literal('(dateCol1, dateCol2) OVERLAPS ('2001-10-30', '2002-10-30')')
+}
+
+find available tables
+
+
+
+Post.findAndCountAll({
+    where: {...},
+    order: [...],
+    limit: 5,
+    offset: 0,
+}).then(function (result) {
+    res.render(...);
+});
+
+find reservation by table
+
+find reservation by date
+
+get list of tables
+
+check availaibilty
+

@@ -1,0 +1,21 @@
+express api schema
+
+user signup
+
+user login login
+
+user
+	/login
+	/addEmployee
+
+tables
+	/getTableList
+	/addTable
+	/removeTable
+
+reservation
+	/checkSlot
+	/reserveTable
+	/getAllReservation
+	/getCalendar
+	/cancelReservation

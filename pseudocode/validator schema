@@ -1,0 +1,40 @@
+joi schema
+
+user
+ - no duplicate username 
+ - username only 4 digit
+ - password min 6 char
+ - role : [admin], [employee]
+ - only admin can add employee
+
+tables
+ - specify table number
+ - specify table seats
+ - only admin can remove tables
+ - can't remove tables with reservation attached
+
+reservations
+ - check slot need number of people. number of people < table size. time in future only
+ 	- return no availability if 
+ 		- requested seats > largest table
+ 		- no slot available for today
+ - make reservation -
+ 	- check table size >party size
+ 	- enter party size, start time, unitx10 minutes slots
+ 	- enter user ref making the reservation
+ - get reservation
+ 	- TODAY DATE
+ 	- check page number
+ 	- check sort param
+ - get calendar
+ 	- check role :admin
+ 	- future reservation from Now
+ 	- filter param table num
+ 	- filter param date
+ - delete reservation
+ 	- check role :admin
+ 	- only now date
+ 	- no deletion before now date
+
+
+
