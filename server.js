@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const moment = require("moment")
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors(corsOptions));
 const db = require("./app/models");
 const Role = db.role;
 const Tables = db.tables;
+const Reservations = db.reservation;
 
 db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync Db');
@@ -35,6 +37,17 @@ function initial() {
   Tables.create({
     table_no: 1,
     capacity: 5
+  });
+  Reservations.create({
+    reservation_id: 1337,
+    table_no: 1,
+    party_size: 1,
+    reservation_date: new Date(),
+    start_time: new Date(),
+    end_time: moment(new Date()).add(30, 'm').toDate(),
+    slot_range: [new Date(), moment(new Date()).add(30, 'm').toDate()],
+    username: 1234
+    
   })
 }
 
@@ -53,6 +66,8 @@ app.get("/", (req, res) => {
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/tables.routes')(app);
+
 
 
 // set port, listen for requests
