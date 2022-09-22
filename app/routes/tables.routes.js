@@ -1,5 +1,6 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/tables.controller");
+const Validator = require('../middleware/validators')
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -17,12 +18,9 @@ module.exports = function(app) {
     controller.getTable
   );
 
+  app.post('/api/addTable', Validator('tables'), controller.addTable  );
 
-  app.post(
-    "/api/addTable",
-    // [authJwt.verifyToken, authJwt.isAdmin],
-    controller.addTable
-  );
+
 
 
   app.post(
