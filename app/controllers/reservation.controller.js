@@ -18,3 +18,18 @@ exports.getAllReservations = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.checkSlots = (req,res) => {}
+
+exports.reserveTable = (req,res) => {
+
+}
+
+exports.getCalendar = (req,res) => {}
+
+exports.cancelReservation = (req,res) => {	
+	Reservations.destroy({
+	  where: { reservation_id: req.body.reservation_id }
+	}).then(res.send("Reservation deleted"));
+}
+
