@@ -1,39 +1,39 @@
 sequelize schecha
 
-tables
-	table_id_num 
-		:unique integer
+x tables
+		table_id_num 
+			:unique integer
 
-	table capacity
-		:integer
-
-
-users
-	username
-		:unique integer 4digit
-	name
-		:char
-	role
-		:array - admin/employee
-	password
-		:char >6 length
+		table capacity
+			:integer
 
 
-reservation
-	table_id_num
-		:foreign
-	username
-		:foreign
-	date
-		:date
-	party_size
-		:integer
-	start_time
-		:timestamp
-	end_time
-		:timestamp
-	schedule
-		:tsrange
+x users
+		username
+			:unique integer 4digit
+		name
+			:char
+		role
+			:array - admin/employee
+		password
+			:char >6 length
+
+
+x reservation
+		table_id_num
+			:foreign
+		username
+			:foreign
+		date
+			:date
+		party_size
+			:integer
+		start_time
+			:timestamp
+		end_time
+			:timestamp
+		schedule
+			:tsrange
 
 
 

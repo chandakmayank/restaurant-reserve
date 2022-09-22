@@ -2,8 +2,8 @@ joi schema
 
 user
  - no duplicate username 
- - username only 4 digit
- - password min 6 char
+ x username only 4 digit
+ x password min 6 char
  - role : [admin], [employee]
  - only admin can add employee
 
@@ -36,5 +36,7 @@ reservations
  	- only now date
  	- no deletion before now date
 
+
+- time only between 12pm to 1159pm
 
 
