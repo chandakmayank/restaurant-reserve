@@ -1,5 +1,6 @@
 const { verifySignUp } = require("../middleware");
 const controller = require("../controllers/auth.controller");
+const Validator = require('../middleware/validators')
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -20,4 +21,14 @@ module.exports = function(app) {
   );
 
   app.post("/api/auth/signin", controller.signin);
+
+  app.post('/validate', Validator('register'), (req, res, next) => {
+    res.json({ post: req.body });
+
+    if (register.validate(req.body).error) {
+        res.send(schema.validate(req.body).error.details);
+    }
+
+  });
+
 };
