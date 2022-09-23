@@ -30,8 +30,8 @@ module.exports = function(app) {
    Validator('reservationRemove'),
    controller.cancelReservation );
 
-app.post('/api/checkSlot', Validator('slotChecker'), controller.checkSlots)
-};
+  app.post('/api/checkSlot', Validator('slotChecker'), controller.checkSlots)
+  };
 
 
 //   app.post(

@@ -51,17 +51,17 @@ db.ROLES = ["user", "admin"];
 // db.tables.hasMany(db.reservation, {as: 'reserveID'});
 // const Reserved_Tables = sequelize.define('reserved_tables', {});
 
-db.tables.belongsToMany(db.reservation, { 
-  through: "reserved_table"
+db.tables.belongsTo(db.reservation, { 
+  through: "reserved_table",
   // as: "table_no_reserved",
-  // foreignKey: "Table_table_no"
+  // foreignKey: "reservation_uid"
 });
 
 db.reservation.belongsTo(db.tables, {
   through: "reserved_tables",
   // uniqueKey: 'my_custom_unique',
   // as: "no_table",
-  // foreignKey: "reservation_id"
+  foreignKey: "table_no"
 });
 
 // Foreign key reservations to username

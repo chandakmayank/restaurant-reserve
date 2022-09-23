@@ -23,9 +23,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     slot_range: {
     	type: Sequelize.RANGE (Sequelize.DATE)
-    },
-    username: {
-    	type: Sequelize.INTEGER
     }
   });
 
