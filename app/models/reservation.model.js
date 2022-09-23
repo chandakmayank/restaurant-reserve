@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Reservations = sequelize.define("reservations", {
     reservation_id: {
-    	type: Sequelize.INTEGER,
+    	type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
     	primaryKey: true,
     	allowNull: false
     },
