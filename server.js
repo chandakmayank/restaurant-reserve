@@ -34,21 +34,21 @@ function initial() {
     roleId: 2,
     name: "admin"
   });
-  Tables.create({
-    table_no: 1,
-    capacity: 5
-  });
+
   Reservations.create({
-    reservation_id: 1337,
-    table_no: 1,
+    // table_no:1337,
     party_size: 1,
     reservation_date: new Date(),
     start_time: new Date(),
     end_time: moment(new Date()).add(30, 'm').toDate(),
     slot_range: [new Date(), moment(new Date()).add(30, 'm').toDate()],
-    username: 1234
-    
-  })
+    username: 1234,
+    table: {table_no:1337, capacity:5}
+  }, {
+    include: [ Tables ]
+  });
+
+
 }
 
 // parse requests of content-type - application/json

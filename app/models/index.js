@@ -32,6 +32,7 @@ db.tables = require("../models/tables.model.js")(sequelize,Sequelize);
 db.reservation = require("../models/reservation.model.js")(sequelize,Sequelize);
 
 
+// Assosiation between user and roles table
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
@@ -44,5 +45,28 @@ db.user.belongsToMany(db.role, {
 });
 
 db.ROLES = ["user", "admin"];
+
+// Associate reservations to tables
+
+// db.tables.hasMany(db.reservation, {as: 'reserveID'});
+// const Reserved_Tables = sequelize.define('reserved_tables', {});
+
+db.tables.belongsToMany(db.reservation, { 
+  through: "reserved_table"
+  // as: "table_no_reserved",
+  // foreignKey: "Table_table_no"
+});
+
+db.reservation.belongsTo(db.tables, {
+  through: "reserved_tables",
+  // uniqueKey: 'my_custom_unique',
+  // as: "no_table",
+  // foreignKey: "reservation_id"
+});
+
+// Foreign key reservations to username
+
+
+
 
 module.exports = db;
