@@ -25,9 +25,9 @@ module.exports = function(app) {
     controller.getAllReservations
   );
 
-  app.post('/api/reserveTable', Validator('reservation'), controller.reserveTable );
+  app.post('/api/reserveTable', Validator('reserveTable'), controller.reserveTable );
   app.post('/api/cancelReservation',
-   // Validator('reservation'),
+   Validator('reservationRemove'),
    controller.cancelReservation );
 
 };
