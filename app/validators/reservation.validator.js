@@ -16,9 +16,6 @@ const reservationSchema = Joi.object({
 
 const slotChecker = Joi.object({
     party_size: Joi.number().greater(0).required(),
-    reservation_date: Joi.date().required(),
-    start_time: Joi.date().timestamp().required(),
-    end_time: Joi.date().timestamp().required()
 })
 
 const reservationRemove = Joi.object({
@@ -28,7 +25,7 @@ const reservationRemove = Joi.object({
 const reserveTable = Joi.object({
     party_size: Joi.number().greater(0).required(),
     reservation_date: Joi.date().min(today).iso().required(),
-    start_hour: Joi.number().max(23).required(),
+    start_hour: Joi.number().min(12).max(23).required(),
     start_minute: Joi.number().min(0).max(59),
     duration: Joi.number().min(10).max(720)
 })
@@ -37,5 +34,6 @@ const reserveTable = Joi.object({
 
 module.exports = {
     reservationRemove: reservationRemove,
-    reserveTable: reserveTable
+    reserveTable: reserveTable,
+    slotChecker: slotChecker
 };
