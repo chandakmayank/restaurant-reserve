@@ -7,6 +7,195 @@
 	},
 	"item": [
 		{
+			"name": "Tables",
+			"item": [
+				{
+					"name": "Add Table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"table_no\": 22,\n    \"capacity\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/addTable",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"addTable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Table list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM3OTA3MTcsImV4cCI6MTY2Mzg3NzExN30.-XyrdxM_EDf2NpUN7Pku0r5ClT6iSHjIWEL4P1EQ-9g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/getTables",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getTables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/removeTable",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"removeTable"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": []
+		},
+		{
+			"name": "Reservations",
+			"item": [
+				{
+					"name": "Get all reservations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/getAllReservations",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getAllReservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reservation_id\": \"91f9e7fd-75ef-4182-a645-af45bcee6066\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/cancelReservation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cancelReservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reserve Table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"party_size\": 4,\n\"reservation_date\": \"2022-09-23\",\n\"start_hour\": \"14\",\n\"start_minute\": \"52\",\n\"duration\": \"30\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/reserveTable",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reserveTable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check slots",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"party_size\": 9\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/checkSlot",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"checkSlot"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Public API test",
 			"request": {
 				"method": "GET",
@@ -70,7 +259,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"mod\",\n    \"email\": \"user@test.com\",\n    \"password\": \"12345678\",\n    \"roles\": [\n        \"user\",\n        \"moderator\"\n    ]\n}",
+					"raw": "{\n    \"username\": 1234,\n    \"email\": \"test@talabat.com\",\n    \"password\": \"12345678\"\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,6 +302,33 @@
 						"api",
 						"test",
 						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Joi validation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"abc@bbd.com\",\n\"username\": \"233\",\n\"password\": \"3errrr3\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/validate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate"
 					]
 				}
 			},
