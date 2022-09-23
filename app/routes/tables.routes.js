@@ -23,8 +23,8 @@ module.exports = function(app) {
 
 
 
-  app.post(
-    "/api/removeTable",
+  app.delete(
+    "/api/removeTable", Validator('removeTable'),
     // [authJwt.verifyToken, authJwt.isAdmin],
     controller.removeTable
   );

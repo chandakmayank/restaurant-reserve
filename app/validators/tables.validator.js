@@ -6,4 +6,12 @@ const tableSchema = Joi.object({
     capacity: Joi.number().greater(0).less(13).required(),
 });
 
+const removeTable = Joi.object({
+    table_no: Joi.number().greater(0).required(),
+})
 module.exports = tableSchema;
+
+module.exports = {
+    tableSchema: tableSchema,
+    removeTable: removeTable
+};

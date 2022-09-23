@@ -1,6 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const Tables= db.tables;
+const Reservations = db.reservation;
 
 const Op = db.Sequelize.Op;
 
@@ -35,59 +36,21 @@ exports.addTable = (req, res) => {
 
 
 exports.removeTable = (req, res) => {
-  res.status(200).send("removeTable.");
+  const table_num = req.body.table_no;
+  Tables.findByPk(table_num).then( record => {
+    console.log("found tables: ", record)
+    Reservations.findAll({
+      where: {table_no: table_num}
+    }).then(reservations_active => {
+      if(reservations_active.length > 0){
+        res.send("Cant delete table as it has reservations attached")
+      } else {
+        Tables.destroy({
+          where: {table_no: table_num}
+        }).then( status => {
+          res.send({"deleted tables":status})
+        })        
+      }
+    })
+  })
 };
-
-
-
-
-
-
-
-
-
-// exports.signin = (req, res) => {
-//   User.findOne({
-//     where: {
-//       username: req.body.username
-//     }
-//   })
-//     .then(user => {
-//       if (!user) {
-//         return res.status(404).send({ message: "User Not found." });
-//       }
-
-//       var passwordIsValid = bcrypt.compareSync(
-//         req.body.password,
-//         user.password
-//       );
-
-//       if (!passwordIsValid) {
-//         return res.status(401).send({
-//           accessToken: null,
-//           message: "Invalid Password!"
-//         });
-//       }
-
-//       var token = jwt.sign({ id: user.id }, config.secret, {
-//         expiresIn: 86400 // 24 hours
-//       });
-
-//       var authorities = [];
-//       user.getRoles().then(roles => {
-//         for (let i = 0; i < roles.length; i++) {
-//           authorities.push("ROLE_" + roles[i].name.toUpperCase());
-//         }
-//         res.status(200).send({
-//           id: user.id,
-//           username: user.username,
-//           email: user.email,
-//           roles: authorities,
-//           accessToken: token
-//         });
-//       });
-//     })
-//     .catch(err => {
-//       res.status(500).send({ message: err.message });
-//     });
-// };
