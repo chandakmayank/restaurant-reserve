@@ -1,6 +1,9 @@
 // Reservation validator
 
 const Joi = require('joi');
+const moment = require('moment');
+
+const today = moment().startOf('day').utc().toDate();
 
 const reservationSchema = Joi.object({
     table_no: Joi.number().greater(0).required(),
@@ -24,9 +27,10 @@ const reservationRemove = Joi.object({
 
 const reserveTable = Joi.object({
     party_size: Joi.number().greater(0).required(),
-    reservation_date: Joi.date().greater('now').required(),
-    start_time: Joi.number().min(1200).max(2358).required(),
-    duration: Joi.number().min(10).max(720).required()
+    reservation_date: Joi.date().min(today).iso().required(),
+    start_hour: Joi.number().max(23).required(),
+    start_minute: Joi.number().min(0).max(59),
+    duration: Joi.number().min(10).max(720)
 })
 
 // module.exports = reservationSchema, slotChecker, reservationRemove, reserveTable;

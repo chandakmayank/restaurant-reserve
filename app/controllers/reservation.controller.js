@@ -26,9 +26,16 @@ exports.checkSlots = (req,res) => {}
 exports.reserveTable = (req,res) => {
     const party_size = req.body.party_size;
     const reservation_date = req.body.reservation_date;
-    const start_time = req.body.start_time;
+    const start_hour = req.body.start_hour;
+    const start_minute = req.body.start_minute;
     const duration = req.body.duration;
 
+const booking_start =  moment(reservation_date).add(start_minute, 'minutes').add(start_hour, 'hour').utc().toDate();
+const booking_end = moment(booking_start).add(duration, 'minutes').utc().toDate();
+
+console.log(booking_start,booking_end)
+
+console.log("time slot" + reservation_date)
   // check table size -> 
   // get all table fitting of size -> 
   // check availability of each table -> 
@@ -55,7 +62,7 @@ exports.reserveTable = (req,res) => {
             // res.send(table_match)
             Reservations.findAll({
               where: {slot_range: {
-                [Op.overlap]: ['2022-09-23T01:50:33.455Z','2022-09-23T01:55:33.455Z']
+                [Op.overlap]: [booking_start,booking_end]
               }}
             }).then(overlaps => {
               res.send(overlaps)
