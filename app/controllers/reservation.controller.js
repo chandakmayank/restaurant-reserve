@@ -53,18 +53,16 @@ exports.reserveTable = (req,res) => {
     const booking_start =  moment(reservation_date).add(start_minute, 'minutes').add(start_hour, 'hour').utc().toDate();
     const booking_end = moment(booking_start).add(duration, 'minutes').utc().toDate();
 
-console.log(booking_start,booking_end)
-
-console.log("time slot" + reservation_date)
-  // check table size -> 
-  // get all table fitting of size -> 
-  // check availability of each table -> 
-  // book first available ->
-  // else no slot available
-const match_tables = []
+      // check table size -> 
+      // get all table fitting of size -> 
+      // check availability of each table -> 
+      // book first available ->
+      // else no slot available
+    const match_tables = []
 
 // find all table with enough capacity
 Tables.findAll({
+    order:  [['capacity', 'ASC']],
     where:{
       capacity: {
         [Op.gte]: party_size
