@@ -35,7 +35,7 @@ x reservation
 		schedule
 			:tsrange
 
-
+tables index by capacity asc
 
 npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string,password:string
 
