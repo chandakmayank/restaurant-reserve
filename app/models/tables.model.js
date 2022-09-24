@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
     },
     capacity: {
       type: Sequelize.INTEGER
+    },
+    reservation_uid: {
+      type: Sequelize.UUID
     }
   });
 
