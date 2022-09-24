@@ -39,7 +39,7 @@ checkRolesExisted = (req, res, next) => {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!ROLES.includes(req.body.roles[i])) {
         res.status(400).send({
-          message: "Failed! Role does not exist = " + req.body.roles[i]
+          message: "Failed! Role does not exist. choose user or admin = " + req.body.roles[i]
         });
         return;
       }
@@ -48,6 +48,7 @@ checkRolesExisted = (req, res, next) => {
   
   next();
 };
+
 
 const verifySignUp = {
   checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
