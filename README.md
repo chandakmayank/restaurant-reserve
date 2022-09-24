@@ -1,6 +1,28 @@
 ## Welcome to Restaurant reservation system
 
-***Quick reservation system using express, postgres, redis***
+***Quick reservation system using express, postgres***
+
+System design and modules
+-
+- **Docker** to manage App Container and DB container
+- **Node/Express** for Application logic
+- **Postgres** for DB
+- **MomentJS** for Date/Time manipulations and transform
+- **Joi** for API validation
+- **Sequelize** ORM for app connection to DB
+- **JWT** for authentication
+
+
+**Folder structure**
+
+- App folder has application code
+- Config for DB connection and auth config
+- Controllers have functions for data manipulation and querying
+- Middleware for API request and response injection/validation
+- Models have user, tables and reservation data models
+- Routes include all accessible API endpoints
+- Validators for checking API request data
+
 
 **Prerequisite to run the app-**
 *Have **docker** installed and running*
@@ -9,6 +31,10 @@
 - User roles `admin` and `user` are placed in database roles table
 - Few tables with different capacity has been initialized
 - One reservation with current time is created
+
+**Assumptions**
+
+- Minimum reservation time is 10 minutes
 
 **Accessing the app**
 
@@ -30,12 +56,3 @@
 8. Enjoy!!
 
 
-**Folder structure**
-
-- App folder has application code
-- Config for DB connection and auth config
-- Controllers have functions for data manipulation and querying
-- Middleware for API request and response injection/validation
-- Models have user, tables and reservation data models
-- Routes include all accessible API endpoints
-- Validators for checking API request data
