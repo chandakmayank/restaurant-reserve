@@ -1,10 +1,12 @@
+const env = process.env;
+
 module.exports = {
-  HOST: "localhost",
+  HOST:"db",
   USER: "postgres",
   PASSWORD: "123",
   DB: "postgres",
   dialect: "postgres",
-  port: '5433',
+  port: env.DB_PORT,
   pool: {
     max: 5,
     min: 0,
