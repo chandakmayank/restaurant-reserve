@@ -5,15 +5,12 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       unique: {
           args: true,
-          msg: 'username already in use!'
+          msg: 'Table already in use!'
       },
       primaryKey: true
     },
     capacity: {
       type: Sequelize.INTEGER
-    },
-    reservation_uid: {
-      type: Sequelize.UUID
     }
   });
 

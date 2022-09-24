@@ -18,7 +18,8 @@ const Tables = db.tables;
 const Reservations = db.reservation;
 
 db.sequelize.sync(
-  // {force: true} use only on dev
+  // {force: true} 
+  // use only on dev
   ).then(() => {
   console.log('Drop and Resync Db');
   initial();
@@ -37,19 +38,19 @@ function initial() {
     name: "admin"
   });
 
-Tables.create({
-  table_no :12,
-  capacity:5
-});
+  Tables.create({
+    table_no :12,
+    capacity:5
+  });
 
-Tables.create({
-  table_no :124,
-  capacity:9
-});
-Tables.create({
-  table_no :122,
-  capacity:11
-});
+  Tables.create({
+    table_no :124,
+    capacity:9
+  });
+  Tables.create({
+    table_no :122,
+    capacity:11
+  });
   Reservations.create({
     party_size: 1,
     reservation_date: new Date(),

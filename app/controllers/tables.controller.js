@@ -20,18 +20,16 @@ exports.getTable = (req, res) => {
 
 
 exports.addTable = (req, res) => {
-  // req.body.table_no
-  // req.body.capacity
+
   Tables.create({
-    table_no:   req.body.table_no,
+    table_no: req.body.table_no,
     capacity: req.body.capacity
-  }).then(
-  res.status(200).send("succeesss")
-  ).catch(err => {
+  }).then( new_table =>{
+    res.status(200).send({"Success!! Table added": new_table})
+  }).catch(err => {
       res.status(500).send({ message: err.message });
     });
 
-  // res.status(200).send("add a table.");
 };
 
 

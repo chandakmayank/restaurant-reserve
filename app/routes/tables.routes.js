@@ -18,7 +18,7 @@ module.exports = function(app) {
     controller.getTable
   );
 
-  app.post('/api/addTable', Validator('tables'), controller.addTable  );
+  app.post('/api/addTable', Validator('tableSchema'), controller.addTable  );
 
 
 
