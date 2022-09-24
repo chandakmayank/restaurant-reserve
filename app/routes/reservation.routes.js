@@ -25,6 +25,12 @@ module.exports = function(app) {
     controller.getAllReservations
   );
 
+  app.get(
+    "/api/getCalendar",
+    // [authJwt.verifyToken, authJwt.isAdmin],
+    controller.getCalendar
+  );
+
   app.post('/api/reserveTable', Validator('reserveTable'), controller.reserveTable );
   app.delete('/api/cancelReservation',
    Validator('reservationRemove'),

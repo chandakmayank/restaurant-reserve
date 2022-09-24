@@ -14,12 +14,37 @@ const today = moment().startOf('day').utc().toDate();
 
 
 exports.getAllReservations = (req, res) => {
-    Reservations.findAll().then( rsrvtn =>{
-      res.status(200).send(rsrvtn);
-    }
-      ).catch(err => {
-      res.status(500).send({ message: err.message });
-    });
+    
+  // Restaurant employees and admins can view all reservations for the current working day.
+  // The API should support pagination to avoid loading a huge amount of reservations at
+  // once.
+  // Employees can sort the reservations by time in ascending or descending manner.
+  const page = req.query.page;
+  var pageoffset = req.query.page*5;
+  if(!page){
+     pageoffset = 0;
+  } 
+  const sort = req.query.sort;
+  var sort_key = "";
+  if (sort == "DESC"){
+    sort_key = "DESC"
+  } else {
+    sort_key = "ASC"
+  }
+
+  Reservations.findAndCountAll({
+    where: {
+      reservation_date :today
+    },
+    order: [['start_time',sort_key]],
+    limit: 5,
+    offset: pageoffset
+  }).then( rsrvtn =>{
+    res.status(200).send(rsrvtn);
+  }
+    ).catch(err => {
+    res.status(500).send({ message: err.message });
+  });
 };
 
 exports.checkSlots = (req,res) => {
@@ -28,7 +53,7 @@ exports.checkSlots = (req,res) => {
   // check table capacity
   // -> check reservations at those tables
   // -> sort asc/desc
-// available slots checking
+  // available slots checking
 
 
 
@@ -65,8 +90,8 @@ exports.reserveTable = (req,res) => {
       // else no slot available
     const match_tables = []
 
-// find all table with enough capacity
-Tables.findAll({
+  // find all table with enough capacity
+  Tables.findAll({
     order:  [['capacity', 'ASC']],
     where:{
       capacity: {
@@ -134,7 +159,49 @@ Tables.findAll({
   })
 }
 
-exports.getCalendar = (req,res) => {}
+exports.getCalendar = (req,res) => {
+
+  // Get all reservations
+  // Only admins can view all reservations for all times.
+  // API must support pagination to avoid loading huge amounts of reservations at once.
+  // Admins can filter reservation by table(s).
+  // Admins can filter reservations by a date range.
+
+
+  var check_for_date = moment();
+  if(req.query.date){
+    check_for_date= moment(req.query.date)
+  }
+  var table_check = req.query.table;
+
+  const page = req.query.page;
+  var pageoffset = req.query.page*5;
+  if(!page){
+     pageoffset = 0;
+  } 
+  const sort = req.query.sort;
+  var sort_key = "";
+  if (sort == "DESC"){
+    sort_key = "DESC"
+  } else {
+    sort_key = "ASC"
+  }
+
+  Reservations.findAndCountAll({
+    where: {
+      reservation_date: check_for_date,
+      table_no: table_check
+    },
+    order: [['start_time',sort_key]],
+    limit: 5,
+    offset: pageoffset
+  }).then( rsrvtn =>{
+    res.status(200).send(rsrvtn);
+  }
+    ).catch(err => {
+    res.status(500).send({ message: err.message });
+  });
+}
 
 exports.cancelReservation = (req,res) => {	
 	Reservations.destroy({
