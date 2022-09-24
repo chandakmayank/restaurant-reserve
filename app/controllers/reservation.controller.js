@@ -203,8 +203,32 @@ exports.getCalendar = (req,res) => {
   });
 }
 
+exports.everyReservation = (req,res) =>{
+  Reservations.findAndCountAll().then(bookings =>{
+    res.status(200).send(bookings);
+  })
+}
+
 exports.cancelReservation = (req,res) => {	
-	Reservations.destroy({
-	  where: { reservation_id: req.body.reservation_id }
-	}).then(res.send("Reservation deleted"));
+	
+  Reservations.findByPk(req.body.reservation_id).then(booking => {
+    const future_booking = moment().utc().isSameOrAfter(booking.end_time); 
+    const same_date = moment().format('YYYY-MM-DD');
+
+    // current time is greater than reservation end time. so dont allow delete
+    if(!future_booking){
+        Reservations.destroy({
+          where: { reservation_id: req.body.reservation_id }
+        }).then(booking => {res.send({"Reservation deleted": booking})}).catch(err =>{
+          res.status(500).send(err)
+        });
+    } else {
+      res.send("Active and past booking cant be deleted")
+    }
+
+  }).catch(err =>{
+    res.status(500).send(err);
+  })
+
+
 }
