@@ -28,8 +28,13 @@ exports.checkSlots = (req,res) => {
   // check table capacity
   // -> check reservations at those tables
   // -> sort asc/desc
+// available slots checking
 
-  Reservations.findAll({  
+
+
+  Reservations.findAll({ 
+    where: { reservation_date : today},
+    order:  [['start_time', 'ASC']], 
     include: { 
       model: Tables, 
       where: {
@@ -136,4 +141,3 @@ exports.cancelReservation = (req,res) => {
 	  where: { reservation_id: req.body.reservation_id }
 	}).then(res.send("Reservation deleted"));
 }
-
