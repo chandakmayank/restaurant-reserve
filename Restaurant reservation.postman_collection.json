@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"table_no\": 21,\n    \"capacity\": 8\n}",
+							"raw": "{\n    \"table_no\": 271,\n    \"capacity\": 12\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,13 +94,98 @@
 		},
 		{
 			"name": "User",
-			"item": []
+			"item": [
+				{
+					"name": "User signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"1214\",\n    \"email\": \"test@talabwwat.com\",\n    \"password\": \"12345678\",\n    \"roles\": [\"user\",\"admin\"]\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST user endpoint",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjYzNTkxMjUyLCJleHAiOjE2NjM2Nzc2NTJ9.VMzfKd2UcFkyOn9AaucY-gZgqgod0H27l1c7cyeeO48",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/test/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"test",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"1214\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Reservations",
 			"item": [
 				{
-					"name": "Get all reservations",
+					"name": "Today reservations",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -119,13 +204,42 @@
 					"response": []
 				},
 				{
+					"name": "Get today reservations filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/getAllReservations?page=0&sort=DESC",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getAllReservations"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete Reservation",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{            \"reservation_id\": \"c5375b5b-6e8d-4d6a-bd54-780cc9918e7a\"\n}\n",
+							"raw": "{            \"reservation_id\": \"b7dedde8-1b7c-49a9-bbc1-dd716959aba5\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,7 +267,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"party_size\": 2,\n\"reservation_date\": \"2022-09-23\",\n\"start_hour\": \"14\",\n\"start_minute\": \"40\",\n\"duration\": \"40\"}",
+							"raw": "{\"party_size\": 2,\n\"reservation_date\": \"2022-09-24\",\n\"start_hour\": \"13\",\n\"start_minute\": \"40\",\n\"duration\": \"40\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -201,6 +315,58 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "reservation by date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/getCalendar?page=0&table=1337&date=\"2022-09-24\"",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getCalendar"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "table",
+									"value": "1337"
+								},
+								{
+									"key": "date",
+									"value": "\"2022-09-24\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Every reservation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/everyReservation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"everyReservation"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -219,90 +385,6 @@
 						"api",
 						"test",
 						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"1214\",\n    \"password\": \"12345678\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/api/auth/signin",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"signin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User signup",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"1214\",\n    \"email\": \"test@talabwwat.com\",\n    \"password\": \"12345678\",\n    \"roles\": [\"user\",\"admin\"]\n\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/api/auth/signup",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"signup"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Access User enpoint",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjYzNTkxMjUyLCJleHAiOjE2NjM2Nzc2NTJ9.VMzfKd2UcFkyOn9AaucY-gZgqgod0H27l1c7cyeeO48",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "localhost:8080/api/test/user",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"test",
-						"user"
 					]
 				}
 			},
