@@ -17,7 +17,9 @@ const Role = db.role;
 const Tables = db.tables;
 const Reservations = db.reservation;
 
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync(
+  // {force: true} use only on dev
+  ).then(() => {
   console.log('Drop and Resync Db');
   initial();
 });
