@@ -26,7 +26,7 @@ module.exports = function(app) {
   );
 
   app.post('/api/reserveTable', Validator('reserveTable'), controller.reserveTable );
-  app.post('/api/cancelReservation',
+  app.delete('/api/cancelReservation',
    Validator('reservationRemove'),
    controller.cancelReservation );
 
