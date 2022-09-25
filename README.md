@@ -55,4 +55,9 @@ System design and modules
 
 8. Enjoy!!
 
+## Reservation Flow diagram
 
+![Core reservation logic](https://github.com/chandakmayank/restaurant-reserve/blob/cbde068d29471a5babb1b911bd79aff3cf59d31a/docs/Reservation%20diagram.jpg)
+
+## ER Diagram
+![DB models](https://github.com/chandakmayank/restaurant-reserve/blob/cbde068d29471a5babb1b911bd79aff3cf59d31a/docs/ER%20diag.png)
