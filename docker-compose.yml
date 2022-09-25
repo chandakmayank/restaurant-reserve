@@ -9,7 +9,7 @@ services:
     depends_on:
       - db
     volumes:
-    - .:/usr/src/app
+    - .:/data/app
 
   db:
     container_name: postgres
