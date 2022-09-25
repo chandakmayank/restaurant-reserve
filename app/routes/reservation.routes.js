@@ -21,34 +21,31 @@ module.exports = function(app) {
 
   app.get(
     "/api/getAllReservations",
-    // [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken],
     controller.getAllReservations
   );
 
   app.get(
     "/api/getCalendar",
-    // [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken],
     controller.getCalendar
   );
 
    app.get(
     "/api/everyReservation",
-    // [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken, authJwt.isAdmin],
     controller.everyReservation
   );
 
-  app.post('/api/reserveTable', Validator('reserveTable'), controller.reserveTable );
+  app.post('/api/reserveTable', 
+    [authJwt.verifyToken, Validator('reserveTable')],
+     controller.reserveTable );
+  
   app.delete('/api/cancelReservation',
-   Validator('reservationRemove'),
+     [authJwt.verifyToken, Validator('reservationRemove')],
    controller.cancelReservation );
 
-  app.post('/api/checkSlot', Validator('slotChecker'), controller.checkSlots)
+  app.post('/api/checkSlot', 
+    [authJwt.verifyToken, Validator('slotChecker')],
+    controller.checkSlots)
   };
-
-
-//   app.post(
-//     "/api/removeTable",
-//     // [authJwt.verifyToken, authJwt.isAdmin],
-//     controller.removeTable
-//   );
-// };

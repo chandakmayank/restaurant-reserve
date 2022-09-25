@@ -14,18 +14,18 @@ module.exports = function(app) {
 
   app.get(
     "/api/getTables",
-    // [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken, authJwt.isAdmin],
     controller.getTable
   );
 
-  app.post('/api/addTable', Validator('tableSchema'), controller.addTable  );
-
-
+  app.post('/api/addTable', 
+        [authJwt.verifyToken, authJwt.isAdmin,Validator('tableSchema')],
+         controller.addTable  );
 
 
   app.delete(
     "/api/removeTable", Validator('removeTable'),
-    // [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken, authJwt.isAdmin],
     controller.removeTable
   );
 };
